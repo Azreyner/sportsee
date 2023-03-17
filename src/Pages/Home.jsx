@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import logo from "../Assets/SportSeeLogo.png";
 import SportsData from "../SportsData.js";
 import BoutonAside from "../Components/BoutonAside";
+import InfoNutrition from "../Components/InfoNutrition";
 import "../Style/Pages/Home.scss";
 
 import Zen from "../Assets/NavAside/Zen.svg";
@@ -10,7 +11,7 @@ import Velo from "../Assets/NavAside/Velo.svg";
 import Muscu from "../Assets/NavAside/Muscu.svg";
 
 function Home() {
-  const [testDonnée, setTestDonnée] = useState();
+  const [keyData, setKeyData] = useState({});
 
   /*useEffect(() => {
     axios
@@ -24,9 +25,13 @@ function Home() {
   }, []);*/
 
   useEffect(() => {
-    const donees = new SportsData();
-    console.log(donees);
-    setTestDonnée(donees.getTest());
+    async function fetchData() {
+      const donees = new SportsData();
+      const result = await donees.callGeneral();
+      console.log("Le résultat :", result[0].id);
+      setKeyData(result[0].keyData);
+    }
+    fetchData();
   }, []);
 
   //console.log(new SportsData().getTest());
@@ -51,7 +56,6 @@ function Home() {
             </li>
           </ul>
         </nav>
-        <h1>{testDonnée}</h1>
       </header>
       <aside>
         <ul>
@@ -70,6 +74,40 @@ function Home() {
         </ul>
         <p>Copiryght, SportSee 2020</p>
       </aside>
+      <main>
+        <div className="infoNutritionList">
+          <ul>
+            <li>
+              <InfoNutrition
+                nomKeyData="calorieCount"
+                unité="cal"
+                valeur={keyData.calorieCount}
+              />
+            </li>
+            <li>
+              <InfoNutrition
+                nomKeyData="carbohydrateCount"
+                unité="g"
+                valeur={keyData.carbohydrateCount}
+              />
+            </li>
+            <li>
+              <InfoNutrition
+                nomKeyData="lipidCount"
+                unité="g"
+                valeur={keyData.lipidCount}
+              />
+            </li>
+            <li>
+              <InfoNutrition
+                nomKeyData="proteinCount"
+                unité="g"
+                valeur={keyData.proteinCount}
+              />
+            </li>
+          </ul>
+        </div>
+      </main>
     </div>
   );
 }
