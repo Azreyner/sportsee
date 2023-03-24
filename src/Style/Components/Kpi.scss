@@ -1,0 +1,85 @@
+.kpi{
+    max-width: 258px;
+    max-height: 263px;
+    background-color: #FBFBFB;
+    border-radius: 5px;
+
+    .custom-tooltip{
+        border: none;
+    }
+
+    &::before {
+        z-index: 1;
+        content: "Score";
+        position: absolute;
+        top: 25px;
+        left: 30px;
+    }
+
+    &__svg-chart {
+        z-index: 25;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            translate: -50% -50%;
+            aspect-ratio: 1/1;
+            height: 165px;
+            background-color: #ffffff33;
+            border-radius: 50%;
+            z-index: -15;
+        }
+    }
+
+    &__percentage {
+        z-index: 15;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        translate: -50% -50%;
+        color: #282D30;
+    }
+
+    &__subtitle {
+        z-index: 15;
+        position: absolute;
+
+        top: 55%;
+        color: var(#74798C);
+        text-align: center;
+        width: 65px;
+    }
+
+    & .recharts-sector.recharts-tooltip-cursor {
+        stroke: none;
+    }
+}
+
+.laLegendeRadialChart {
+    font-size: 18px;
+    max-width: 100px;
+    text-align: center;
+    margin-top: -25px;
+    margin: auto;
+    border-radius: 100px;
+    background-color: #fff;
+    padding: 8% 9%;
+
+    &__texte{
+        
+        color: #74798C;
+        font-weight: 600;
+
+        span{
+            color: #282D30;
+            font-weight: 800;
+        }
+    } 
+    
+}
+
+
+

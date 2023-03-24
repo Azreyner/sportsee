@@ -3,6 +3,10 @@ import logo from "../Assets/SportSeeLogo.png";
 import SportsData from "../SportsData.js";
 import BoutonAside from "../Components/BoutonAside";
 import InfoNutrition from "../Components/InfoNutrition";
+import Objectifs from "../Components/Objectifs";
+import Kpi from "../Components/Kpi";
+import Radar from "../Components/Radar";
+import Poids from "../Components/Poids";
 import "../Style/Pages/Home.scss";
 
 import Zen from "../Assets/NavAside/Zen.svg";
@@ -10,8 +14,14 @@ import Nage from "../Assets/NavAside/Nage.svg";
 import Velo from "../Assets/NavAside/Velo.svg";
 import Muscu from "../Assets/NavAside/Muscu.svg";
 
+import { ResponsiveContainer } from "recharts";
+
 function Home() {
+  const donees = new SportsData();
+
   const [keyData, setKeyData] = useState({});
+  const [todayScore, setTodayScore] = useState();
+  const [avgSessionData, setAvgSessionData] = useState({});
 
   /*useEffect(() => {
     axios
@@ -26,10 +36,18 @@ function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const donees = new SportsData();
       const result = await donees.callGeneral();
-      console.log("Le résultat :", result[0].id);
-      setKeyData(result[0].keyData);
+      setKeyData(result.data.keyData);
+      setTodayScore(result.data.todayScore);
+      console.log(result);
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      const result = await donees.callAvgSession();
+      setAvgSessionData(result.data.sessions);
     }
     fetchData();
   }, []);
@@ -74,7 +92,24 @@ function Home() {
         </ul>
         <p>Copiryght, SportSee 2020</p>
       </aside>
+      {/** LES GRAPHIQUES */}
       <main>
+        <div className="lesGraphiques">
+          <div className="infosPerso">
+            <h1>
+              Bonjour <span>Thomas</span>
+            </h1>
+            <p>Félicitation ! Vous avez explosé vos objectifs hier 👏</p>
+          </div>
+          <div className="graphBougie">
+            <Poids />
+          </div>
+          <div className="troisGraph">
+            <Objectifs lesDonnéesAVGSession={avgSessionData} />
+            <Radar />
+            <Kpi leScore={todayScore} />
+          </div>
+        </div>
         <div className="infoNutritionList">
           <ul>
             <li>
@@ -82,20 +117,7 @@ function Home() {
                 nomKeyData="calorieCount"
                 unité="cal"
                 valeur={keyData.calorieCount}
-              />
-            </li>
-            <li>
-              <InfoNutrition
-                nomKeyData="carbohydrateCount"
-                unité="g"
-                valeur={keyData.carbohydrateCount}
-              />
-            </li>
-            <li>
-              <InfoNutrition
-                nomKeyData="lipidCount"
-                unité="g"
-                valeur={keyData.lipidCount}
+                leType="Calories"
               />
             </li>
             <li>
@@ -103,11 +125,29 @@ function Home() {
                 nomKeyData="proteinCount"
                 unité="g"
                 valeur={keyData.proteinCount}
+                leType="Protéines"
+              />
+            </li>
+            <li>
+              <InfoNutrition
+                nomKeyData="carbohydrateCount"
+                unité="g"
+                valeur={keyData.carbohydrateCount}
+                leType="Glucides"
+              />
+            </li>
+            <li>
+              <InfoNutrition
+                nomKeyData="lipidCount"
+                unité="g"
+                valeur={keyData.lipidCount}
+                leType="Lipides"
               />
             </li>
           </ul>
         </div>
       </main>
+      {/** FIN LES GRAPHIQUES */}
     </div>
   );
 }
