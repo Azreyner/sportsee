@@ -96,12 +96,12 @@ const Poids = () => {
     );
   };
 
-  const CustomTooltip = ({ active, payload, label }) => {
+  const customTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
       return (
         <div className="custom-tooltip">
-          <p className="kg">{payload[0].dataKey.value} kg</p>
-          <p className="kCal">{payload[0].dataKey.value} kCal</p>
+          <p className="kg">{payload[0].payload.kilogram} kg</p>
+          <p className="kCal">{payload[0].payload.calories} kCal</p>
         </div>
       );
     }
@@ -110,10 +110,10 @@ const Poids = () => {
   };
 
   return (
-    <ResponsiveContainer width="99%" height="80%">
+    <div className="laBarChart">
+      <p id="titreBarchart">Activité quotidienne</p>
+      <ResponsiveContainer className="laBarChart__chartContainer" width="99%" height="65%">
       <BarChart
-        width={835}
-        height={280}
         data={data}
         margin={{
           top: 5,
@@ -122,30 +122,31 @@ const Poids = () => {
           bottom: 5,
         }}
         barGap={10}
-        barCategoryGap={60}
       >
         <CartesianGrid strokeDasharray="3 3" vertical={false} />
         <XAxis dataKey="day" tick={renderCustomAxisTick} tickLine={false} />
         <YAxis orientation="right" domain={[69, "auto"]} tickLine={false} />
         <Tooltip
           cursor={{ fill: "rgba(196, 196, 196, 0.5)" }}
-          content={<CustomTooltip />}
+          content={customTooltip}
         />
         <Bar
           dataKey="kilogram"
           fill="#282D30"
-          maxBarSize={10}
+          maxBarSize={15}
           radius={[10, 10, 0, 0]}
         />
         <Bar
           dataKey="calories"
           fill="#E60000"
-          maxBarSize={10}
+          maxBarSize={15}
           radius={[10, 10, 0, 0]}
         />
         <Legend content={renderLegend} />
+        <p id="titreBarchart">Activité quotidienne</p>
       </BarChart>
     </ResponsiveContainer>
+    </div>
   );
 };
 
