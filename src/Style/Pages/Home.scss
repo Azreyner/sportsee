@@ -12,23 +12,25 @@
 
         .lesGraphiques{
             width: 70%;
-            border: solid #020203;
             padding: 20px;
             display: flex;
             flex-flow: column;
 
             .graphBougie{
-                height: 320px;
-                padding-top: 30px;
-                padding-bottom: 15px;
+                height: 400px;
+                padding-top: 10px;
+                border-radius: 10px;
                 background: #FBFBFB;
                 display: flex;
                 align-items: flex-end;
             }
 
             .troisGraph{
-                height: 263px;
+                min-height: 263px;
                 display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                margin-top: 25px;
             }
         }
 

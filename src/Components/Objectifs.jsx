@@ -52,7 +52,7 @@ const Objectifs = ({ lesDonnéesAVGSession }) => {
 
     return (
       <g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666">
+        <text x={0} y={0} dy={16} textAnchor="end" fill="#FFFFFF">
           {tick}
         </text>
       </g>
@@ -62,7 +62,7 @@ const Objectifs = ({ lesDonnéesAVGSession }) => {
   function CustomTooltip({ payload, label, active }) {
     if (active) {
       return (
-        <div className="custom-tooltip">
+        <div className="custom-tooltip--objectif">
           <p className="label">{`${payload[0].value} min`}</p>
         </div>
       );
@@ -79,11 +79,18 @@ const Objectifs = ({ lesDonnéesAVGSession }) => {
         data={data}
         text="Durée moyenne des sessions"
       >
+        <Tooltip
+          content={<CustomTooltip />}
+          wrapperStyle={{ outline: "none" }}
+          position={{ y: 0 }}
+        />
         <Line
           type="monotone"
           dataKey="sessionLength"
-          stroke="#8884d8"
+          stroke="#fff"
+          dot={false}
           activeDot={{ r: 8 }}
+          strokeWidth={3}
         />
         <XAxis
           dataKey="day"
@@ -91,7 +98,6 @@ const Objectifs = ({ lesDonnéesAVGSession }) => {
           axisLine={false}
           tickLine={false}
         />
-        <Tooltip content={<CustomTooltip />} position={{ y: 0 }} />
       </LineChart>
     </ResponsiveContainer>
   );

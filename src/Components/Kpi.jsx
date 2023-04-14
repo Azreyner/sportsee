@@ -5,80 +5,69 @@ import {
   Legend,
   ResponsiveContainer,
   Tooltip,
+  Pie,
+  PieChart,
+  Cell,
 } from "recharts";
 import "../Style/Components/Kpi.scss";
 
 const Kpi = ({ leScore }) => {
-  const data = [{ name: "Score", value: leScore * 100, fill: "red" }];
-  const style = {
-    top: "15%",
-    left: "5%",
-    transform: "translate(0, -50%)",
-    lineHeight: "24px",
-  };
+  const data = [
+    { name: "Score", value: leScore, fill: "#ff0000" },
+    { name: "Score", value: 1 - leScore, fill: "#ff0000" },
+  ];
 
-  function RenderCusomizedLegend() {
+  console.log("LA DATA :", data);
+
+  const COLORS = ["#FF0000", "transparent"];
+
+  const CustomizedLegend = ({ leScore }) => {
     return (
-      <div className="laLegendeRadialChart">
-        <p className="laLegendeRadialChart__texte">
-          <span>{`${leScore * 100}%`}</span>
-          <br /> de votre objectif
+      <div className="kpi__legende">
+        <p>
+          <span className="pourcentage">{`${leScore * 100}%`}</span>
+          <br />
+          de votre
+          <br />
+          objectif
         </p>
       </div>
     );
-  }
+  };
 
   return (
-    <ResponsiveContainer>
-      {/*<RadialBarChart
-        cx="50%"
-        cy="50%"
-        innerRadius="100%"
-        outerRadius="80%"
-        data={data}
-        barSize={15}
-        startAngle={180}
-        endAngle={0}
-      >
-        <RadialBar
-          minAngle={15}
-          label={false}
-          clockWise
-          dataKey="value"
-          cornerRadius={20}
-        />
-        <Legend
-          iconSize={0}
-          layout="vertical"
-          verticalAlign="middle"
-          wrapperStyle={style}
-          color="orange"
-        />
-  </RadialBarChart>*/}
-      <RadialBarChart
-        width={258}
-        height={263}
-        innerRadius="65%"
-        outerRadius="80%"
-        data={data}
-        margin={{
-          top: 0,
-          right: 0,
-          left: 0,
-          bottom: 0,
-        }}
-        className="kpi gauge-chart__svg-chart"
-        startAngle={90}
-        endAngle={90 + (leScore * 100 * 360) / 100}
-      >
-        <RadialBar name="score" dataKey="value" cornerRadius={100} background />
-        <Legend
-          iconType="circle"
-          content={<RenderCusomizedLegend />}
-          verticalAlign="middle"
-        />
-      </RadialBarChart>
-    </ResponsiveContainer>
+    <div className="kpi">
+      <h1>Score</h1>
+      <ResponsiveContainer width="99%" height="99%">
+        <PieChart>
+          <circle cx="50%" cy="50%" r={"25%"} fill="#FFFFFF" />
+          <Pie
+            data={data}
+            dataKey="value"
+            fill="#FF0000"
+            cx="50%"
+            cy="50%"
+            startAngle={90}
+            endAngle={450}
+            innerRadius={"50%"}
+            outerRadius={"55%"}
+            cornerRadius="100%"
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+                stroke="none"
+              />
+            ))}
+          </Pie>
+          <Legend
+            verticalAlign="middle"
+            content={<CustomizedLegend leScore={leScore} />}
+          />
+        </PieChart>
+      </ResponsiveContainer>
+    </div>
   );
 };
 

@@ -35,7 +35,7 @@ class SportsData {
     try {
       let id = this.userId;
       const response = await fetch("./generalMocked.json");
-      //const response = await fetch(`http://localhost:3000/user/${this.userId}`);
+      //const response = await fetch(`http://localhost:3000/user/${id}`);
       const data = await response.json();
       const lesInfosGenerales = data;
       return lesInfosGenerales;

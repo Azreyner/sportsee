@@ -1,85 +1,43 @@
 .kpi{
     max-width: 258px;
+    min-width: 258px;
     max-height: 263px;
+    min-height: 263px;
+    position: relative;
     background-color: #FBFBFB;
     border-radius: 5px;
 
-    .custom-tooltip{
-        border: none;
-    }
 
-    &::before {
-        z-index: 1;
-        content: "Score";
+    h1{
         position: absolute;
-        top: 25px;
-        left: 30px;
-    }
-
-    &__svg-chart {
-        z-index: 25;
-        position: relative;
-
-        &::before {
-            content: "";
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            translate: -50% -50%;
-            aspect-ratio: 1/1;
-            height: 165px;
-            background-color: #ffffff33;
-            border-radius: 50%;
-            z-index: -15;
-        }
-    }
-
-    &__percentage {
-        z-index: 15;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        translate: -50% -50%;
-        color: #282D30;
-    }
-
-    &__subtitle {
-        z-index: 15;
-        position: absolute;
-
-        top: 55%;
-        color: var(#74798C);
-        text-align: center;
-        width: 65px;
-    }
-
-    & .recharts-sector.recharts-tooltip-cursor {
-        stroke: none;
-    }
-}
-
-.laLegendeRadialChart {
-    font-size: 18px;
-    max-width: 100px;
-    text-align: center;
-    margin-top: -25px;
-    margin: auto;
-    border-radius: 100px;
-    background-color: #fff;
-    padding: 8% 9%;
-
-    &__texte{
-        
-        color: #74798C;
+        font-size: 18px;
         font-weight: 600;
+        top: 10px;
+        left: 25px;
+    }
 
-        span{
-            color: #282D30;
-            font-weight: 800;
+    .titre{
+        color: #191d2e;
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    &__legende{
+        color: #74798C;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 20px;
+        margin-top: 20px;
+
+        .pourcentage{
+            color: #20253A;
+            font-size: 20px;
+            font-weight: 700;
         }
-    } 
-    
+    }
 }
-
-
-

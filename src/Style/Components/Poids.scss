@@ -2,30 +2,34 @@
     width: 100%;
     height: 100%;
     position: relative;
-    padding-top: 50px;
 
     #titreBarchart{
         position: absolute;
         top: 15px;
         left: 15px;
+        margin: 0;
+        margin-left: 15px;
+        font-weight: 600;
     }
 
     &__chartContainer{
-        padding-top: 20px;
         padding-left: 20px;
+        position: relative;
+        min-height: 150px;
     }
 }
 
 .lesLegendes{
     display: flex;
-    position: absolute;
-    top: -280px;
-    right: 10px;
+    color: #74798C;
+    font-weight: 600;
+    font-size: 14px;
 }
 
 .legende{
-    width: 180px;
+    width: 165px;
     display: flex;
+    justify-content: center;
     flex-flow: row nowrap;
 
     &__cercle{
@@ -48,8 +52,17 @@
 }
 
 .custom-tooltip{
-    background-color: #E60000;
-    color: white;
-    padding: 10px;
+
+    &--poids{
+        background-color: #E60000;
+        color: white;
+        padding: 10px;
+    }
+
+    &--objectif{
+        background-color: #fff;
+        padding: 8px;
+        color: black;
+    }
 }
 
